@@ -1,0 +1,46 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n,m,S=0,b=0,l=0;
+    cin >> n >> m;
+    int arr[n][m];
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
+            cin >> arr[i][j];
+        }
+    }
+    int max[n];
+    for(int k=0; k<n; k++){
+        max[k]=0;
+    }
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
+            if(arr[i][j]>max[i]){
+                max[i]=arr[i][j];
+            }
+        }
+    }
+    for(int k=0; k<n; k++){
+        S+=max[k];
+    }
+    cout<<S<<endl;
+    for(int k=0; k<n; k++){
+        if(S%max[k]==0&&l==0){
+            cout << max[k] ;
+            b=1;
+            l=1;
+            continue;
+        }
+        if(S%max[k]==0){
+            cout << " " << max[k] ;
+            b=1;
+        }
+    }
+    if(b==0){
+        cout << "-1";
+    }
+    return 0;
+}
