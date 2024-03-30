@@ -1,0 +1,45 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int a, b, n, A[10000], j, x, h1, h2, h3=0;
+    cin >> a >> b;
+    cin >> n;
+    for(int i=0; i<n; i++){
+        j=0;
+        h1=0;
+        h2=0;
+        while(cin>>x){
+            if(x>0){
+                A[j]=x;
+                j++;
+            }
+            if(x<0){
+                for(int k=0; k<=j; k++){
+                    if((-x)==A[k]){
+                        A[k]=A[k]+x;
+                        break;
+                    }
+                }
+            }
+            if(x==0){
+                break;
+            }
+        }
+        for(int k=0; k<j; k++){
+            if(A[k]==a){
+                h1=1;
+            }
+            if(A[k]==b){
+                h2=1;
+            }
+        }
+        if(h1==1&&h2==1){
+                h3++;
+        }
+    }
+        cout << h3 ;
+    return 0;
+}
