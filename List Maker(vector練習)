@@ -1,0 +1,45 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    vector<string> a;
+    string n, m, k;
+    int i,j;
+    cin >> n;
+    while(n!="SHOW"){
+        cin >> m;
+        if(n=="ADD"){
+           a.push_back(m); 
+        }
+        else if(n=="INSERT"){
+            cin >> k;
+            for(i=0; i<a.size(); i++){
+                if(k==a[i]){
+                    break;
+                }
+            }
+            a.insert(a.begin()+i, m);
+        }
+        else if((n=="REMOVE")){
+            for(j=0; j<a.size(); j++){
+                if(m==a[j]){
+                    break;
+                }
+            }
+            a.erase(a.begin()+j);
+        }
+        cin >> n;
+    }
+    
+    for(int p=0; p<a.size(); p++){
+        cout << a[p] << " ";
+    }
+
+    return 0;
+}
+
+
+
