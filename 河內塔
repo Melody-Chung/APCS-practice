@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+void count(int, char, char, char);
+int step=0;
+
+int main()
+{
+    int n;
+    cout << "total: ";
+    cin >> n;
+    count(n, 'A', 'B', 'C');
+    cout << "step: "<<step;
+
+    return 0;
+}
+void count(int n, char src, char tmp, char tgt){
+    if(n==1){
+        step++;
+        cout << src <<" move to "<<tgt << endl;;
+
+    }
+    else{
+        count(n-1, src, tgt, tmp);
+        count(1, src, tmp, tgt);
+        count(n-1, tmp, src, tgt);
+    }
+    
+}
