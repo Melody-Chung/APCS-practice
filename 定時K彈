@@ -1,0 +1,26 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    vector<int> a;
+    int n, m, k, h=0;
+    cin >> n >> m >> k;
+    for(int i=1; i<=n; i++){
+        a.push_back(i);
+    }
+    
+    for(int j=0; j<k; j++){
+        h=h+m-1;
+        if(h>=a.size()){
+            h=h%a.size();
+        }
+        a.erase(a.begin()+h);
+    }
+    h=h%a.size();
+    cout<< a[h];
+    return 0;
+}
+
+
