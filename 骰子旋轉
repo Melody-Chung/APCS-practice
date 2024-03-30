@@ -1,0 +1,44 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n, m, a, b, temp;
+    cin >> n >> m; 
+    int dice[n+1][7];
+    for(int i=0; i<=n; i++){
+        for(int j=1; j<7; j++){
+            dice[i][j]=j;
+        }
+    }
+    for(int i=0; i<m; i++){
+        cin >> a >> b;
+        if(b>0){
+            for(int j=1; j<7; j++){
+                dice[0][j]=dice[a][j];
+                dice[a][j]=dice[b][j];
+                dice[b][j]=dice[0][j];
+            }
+        }
+        else if(b==-1){
+            temp=dice[a][1];
+            dice[a][1]=dice[a][3];
+            dice[a][3]=dice[a][6];
+            dice[a][6]=dice[a][4];
+            dice[a][4]=temp;
+        }
+        else{
+            temp=dice[a][1];
+            dice[a][1]=dice[a][5];
+            dice[a][5]=dice[a][6];
+            dice[a][6]=dice[a][2];
+            dice[a][2]=temp;
+        }
+    }
+    for(int i=1;i<=n ; i++){
+        cout << dice[i][1] <<" ";
+    }
+
+    return 0;
+}
