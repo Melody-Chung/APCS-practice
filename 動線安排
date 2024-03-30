@@ -1,0 +1,137 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int m, n, h, a, b, c, num=0, max, y, x[4]={0, 0, 0, 0};
+    cin >> m >> n >> h;
+    int A[m][n];
+    //矩陣歸 0
+    for(int i=0; i<m; i++){
+        for(int j=0; j<n; j++){
+            A[i][j]=0;
+        }
+    }
+    // 執行h次指令
+    for(int i=0; i<h; i++){
+        cin >> a >> b >> c;
+    // 1代表柱子；-1代表線 ; 如果線有交叉就變-2
+        //加入柱子
+        if(c==0){
+            //有線的情況，把上下左右的線拆掉
+            if(A[a][b]<0){
+                y=1;
+                while(A[a-y][b]<0){
+                    A[a-y][b]=0;
+                    y++;
+                }
+                y=1;
+                while(A[a+y][b]<0){
+                    A[a+y][b]=0;
+                    y++;
+                }
+                y=1;
+                while(A[a][b-y]<0){
+                    A[a][b-y]=0;
+                    y++;
+                }
+                y=1;
+                while(A[a][b+y]<0){
+                    A[a][b+y]=0;
+                    y++;
+                }
+            }
+            //插入柱子
+            A[a][b]=1;
+            //連線
+            //先判斷柱子上、下、左、右有沒有其他柱子，x[]當布林函數用
+            for(int j=0; j<m; j++){
+                if((A[j][b]==1)&&(j<a)){
+                    x[0]=1;
+                }
+                if((A[j][b]==1)&&(j>a)){
+                    x[1]=1;
+                }
+            }
+            for(int j=0; j<n; j++){
+                if((A[a][j]==1)&&(j<b)){
+                    x[2]=1;
+                }
+                if((A[a][j]==1)&&(j>b)){
+                    x[3]=1;
+                }
+            }
+            //向上、下、左、右連線
+            y=1;
+            while(A[a-y][b]!=1&&x[0]==1){
+                A[a-y][b]--;
+                y++;
+            }
+            x[0]=0;
+            y=1;
+            while(A[a+y][b]!=1&&x[1]==1){
+                A[a+y][b]--;
+                y++;
+            }
+            x[1]=0;
+            y=1;
+            while(A[a][b-y]!=1&&x[2]==1){
+                A[a][b-y]--;
+                y++;
+            }
+            x[2]=0;
+            y=1;
+            while(A[a][b+y]!=1&&x[3]==1){
+                A[a][b+y]--;
+                y++;
+            }
+            x[3]=0;
+        }
+        //拔柱子
+        else{
+            A[a][b]=0;
+            y=1;
+            //將柱子上下左右的線拆掉
+            while(A[a-y][b]<0){
+                A[a-y][b]++;
+                y++;
+            }
+            y=1;
+            while(A[a+y][b]<0){
+                A[a+y][b]++;
+                y++;
+            }
+            y=1;
+            while(A[a][b-y]<0){
+                A[a][b-y]++;
+                y++;
+            }
+            y=1;
+            while(A[a][b+y]<0){
+                A[a][b+y]++;
+                y++;
+            }
+        }
+        //掃描整個矩陣，不是0就+1
+        num=0;
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(A[i][j]!=0){
+                    num++;
+                }
+                //輸出矩陣(測試用)
+                //cout << A[i][j] << "\t";
+            }
+            //cout << endl;
+        }
+        //儲存最大值
+        if(max<num){
+            max=num;
+        }
+    }
+    //輸出面積最大值和最後的面積
+    cout<< max <<endl << num;
+
+    return 0;
+}
