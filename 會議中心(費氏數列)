@@ -1,0 +1,23 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n=0;
+    int a[50];
+    a[0]=1;
+    a[1]=1;
+    for(int i=2; i<50; i++){
+        a[i]=a[i-1]+a[i-2];
+    }
+    while(cin >> n){
+        cout << a[n];
+    }
+
+
+
+    return 0;
+}
+
+
