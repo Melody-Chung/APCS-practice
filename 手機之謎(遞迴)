@@ -1,0 +1,54 @@
+#include <iostream>
+
+using namespace std;
+void print(int A[],int R[], int now, int total){
+    if(now==1){
+        for(int j=total; j>=0; j--){
+            if(R[j]!=0){
+                cout << R[j];
+            }
+        }
+        for(int i=0; i<total; i++){
+            if(A[i]==0){
+                cout << i+1 << endl;
+                //cout << "final: " << i+1 << endl;
+            }
+        }
+    }
+    else{
+        for(int i=total-1; i>=0; i--){
+            //cout << endl << "total: " << total << " now :" << now << " i: " << i << endl;
+            if(A[i]==0){
+                R[now]=i+1;
+                A[i]=total;
+                int temp[total];
+                for(int j=0; j<total; j++){
+                    temp[j]=A[j];
+                }
+                print(temp, R , now-1, total);
+                A[i]=0;
+                R[now]=0;
+            }
+        }
+    }
+    
+}
+
+int main()
+{
+    int n;
+    while(cin >> n){
+        int A[n], R[n+1];
+        R[n]=0;
+        for(int i=0; i<n; i++){
+            A[i]=0;
+            R[i]=0;
+        }
+        print(A, R, n, n);
+    }
+    
+    
+    
+    return 0;
+}
+
