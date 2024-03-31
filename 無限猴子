@@ -1,0 +1,39 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    string a, b;
+    cin >> a >> b;
+    int c[a.size()], d=0;
+    for(int i=0; i<a.size(); i++){
+        c[i]=0;
+    }
+    for(int i=0; i<a.size(); i++){
+       for(int j=i; j<b.size(); j++){
+           if(a[i]!=b[j]){
+               b[j]='!';
+           }
+           else{
+               c[i]=1;
+               break;
+           }
+       }
+    }
+    for(int i=0; i<a.size(); i++){
+        if(c[i]!=0){
+            d=1;
+        }
+    }
+    if(d==0){
+        cout << "NO";
+    }
+    else{
+        cout << "YES";
+    }
+
+    return 0;
+}
+
+
