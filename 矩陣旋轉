@@ -1,0 +1,92 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int R, C, M, n=0, c;
+    while(cin >> R >> C >> M){
+    n=0;
+    int a[R][C], a1[C][R], b[M];
+    for(int i=0; i<R; i++){
+        for(int j=0; j<C; j++){
+            cin >> a[i][j];
+        }
+    }
+    for(int k=0; k<M; k++){
+        cin >> b[k];
+    }
+    for(int k=M-1; k>=0; k--){
+        if(b[k]==0){
+            if((n%2)==0){
+               for(int i=0; i<C; i++){
+                   for(int j=0; j<R; j++){
+                       a1[i][j]=a[j][C-1-i];
+                   }
+               }
+            }
+            if((n%2)==1){
+                for(int i=0; i<R; i++){
+                   for(int j=0; j<C; j++){
+                       a[i][j]=a1[j][R-1-i];
+                   }
+               }
+            }
+            n++;
+        }
+        if(b[k]==1){
+            if(n%2==0){
+               for(int i=0; i<R/2; i++){
+                   for(int j=0; j<C; j++){
+                        c=a[i][j];
+                        a[i][j]=a[R-1-i][j];
+                        a[R-1-i][j]=c;
+                   }
+               }
+            }
+            if(n%2==1){
+                for(int i=0; i<C/2; i++){
+                   for(int j=0; j<R; j++){
+                        c=a[i][j];
+                        a1[i][j]=a1[R-1-i][j];
+                        a1[R-1-i][j]=c;
+                   }
+               }
+            }
+        }
+    }
+    
+    
+    if(n%2==0){
+        cout << R << " "<< C <<endl;
+        for(int i=0; i<R; i++){
+            for(int j=0; j<C; j++){
+                if(j==0){
+                    cout << a[i][j];
+                    continue;
+                }
+                cout << " " <<a[i][j];
+            }
+                cout << endl;
+            
+        }  
+    }
+    if(n%2==1){
+        cout << C << " "<< R <<endl;
+        for(int i=0; i<C; i++){
+            for(int j=0; j<R; j++){
+                if(j==0){
+                    cout << a1[i][j];
+                    continue;
+                }
+                cout << " "<<a1[i][j] ;
+            }
+                cout << endl;
+            
+        }     
+    }
+    }
+    return 0;
+}
+
+
