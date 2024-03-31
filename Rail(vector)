@@ -1,0 +1,80 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    vector <int> A;
+    vector <int> station;
+    int N, k=1, b, c;
+    cin >> N;
+    while(N!=0){
+        k=1;
+        while(k!=0){
+            c=1;
+            b=1;
+            vector <int> A;
+            vector <int> station;
+            for(int i=N; i>0; i--){
+                A.push_back(i);
+                //cout <<i;
+            }
+            /*
+            for(int o=0; o<station.size(); o++){
+                station.pop_back();
+            }*/
+            station.push_back(A[A.size()-1]);
+            A.pop_back();
+            for(int j=0; j<N; j++){
+                //cout <<j;
+                cin >> k;
+                if(k==0){
+                    break;
+                }
+                //cout << station.front();
+                
+                while(c!=0){
+                    //cout << "AAA";
+                    if(k==station[station.size()-1]){
+                        station.pop_back();
+                        //cout << "BBB"<<endl;
+                        break;
+                    }
+                    else{
+                        station.push_back(A[A.size()-1]);
+                        A.pop_back();
+                        if(A.size()==0){
+                            c=0;
+                        }
+                        //cout << "CCC" << A.size() <<" "<<station.size()<<endl;
+                    }
+                }
+                //for(int o=0; o<station.size(); o++){
+                    //cout << station[o]<< " ";
+                //}
+                //cout << "A"<<endl;
+                if(c==0){
+                    if(k==station[station.size()-1]){
+                        station.pop_back();
+                        //cout <<"DDD"<<endl;
+                    }
+                    else{
+                        //cout <<k << " "<<station[station.size()-1]<<endl;
+                        b=0;
+                    }
+                
+                }
+            }
+            if(b==1&&k!=0){
+                cout << "Yes" << endl;
+            }
+            if(b==0&&k!=0){
+                cout << "No" << endl;
+            }
+        }
+        cout <<endl;
+        cin >> N;
+    }
+
+    return 0;
+}
