@@ -1,0 +1,65 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main()
+{
+    stack<int> ax, ay;
+    int m, count=0, tx, ty, b=0;
+    string k;
+    cin >> m;
+    int A[m][m];
+    for(int i=0; i<m; i++){
+        cin >> k;
+        for(int j=0; j<m; j++){
+            if(k[j]=='#'){
+                A[i][j]=-1;
+            }
+            else{
+                A[i][j]=10000;
+            }
+        }
+    }
+    A[1][1]=1;
+    ax.push(1);
+    ay.push(1);
+    while(ax.size()!=0){
+        tx = ax.top();
+        ty = ay.top();
+        ax.pop();
+        ay.pop();
+        if(tx==m-2&&ty==m-2){
+            b=1;
+        }
+        if(A[tx+1][ty]!=-1&&(A[tx][ty]+1<A[tx+1][ty])){
+            ax.push(tx+1);
+            ay.push(ty);
+            A[tx+1][ty]=A[tx][ty]+1;
+        }
+        if(A[tx-1][ty]!=-1&&(A[tx][ty]+1<A[tx-1][ty])){
+            ax.push(tx-1);
+            ay.push(ty);
+            A[tx-1][ty]=A[tx][ty]+1;
+        }
+        if(A[tx][ty+1]!=-1&&(A[tx][ty]+1<A[tx][ty+1])){
+            ax.push(tx);
+            ay.push(ty+1);
+            A[tx][ty+1]=A[tx][ty]+1;
+        }
+        if(A[tx][ty-1]!=-1&&(A[tx][ty]+1<A[tx][ty-1])){
+            ax.push(tx);
+            ay.push(ty-1);
+            A[tx][ty-1]=A[tx][ty]+1;
+        }
+    }
+    if(b==0){
+        cout << "No solution!";
+    }
+    else{
+        cout << A[m-2][m-2];
+    }
+
+    return 0;
+}
+
+
