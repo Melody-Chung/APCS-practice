@@ -1,0 +1,82 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int used[1000][1000];
+int l=0;
+void f(int A[], int r, int all, int now){
+    if(now==r){
+        int ok=1;
+        for(int i=0; i<l; i++){
+            ok=0;
+            for(int j=0; j<r; j++){
+                if(A[j]!=used[i][j]){
+                    ok=1;
+                }
+            }
+            if(ok==0){
+                break;
+            }
+        }
+        if(ok==1){
+            for(int i=0; i<r; i++){
+                cout << char(A[i]);
+                used[l][i]=A[i];
+            }
+            cout << endl;
+            l++;
+            //cout << "final: " << char(A[r-1]) << endl;
+        }
+        
+    }
+    else{
+        int k, b=0;
+        for(int i=now; i<all; i++){
+            if(now==0){
+                k=0;
+            }
+            else if(A[i]>=A[now-1]){
+                k=i;
+                break;
+            }
+            else{
+                k=all;
+            }
+        }
+        //if(b==0){
+        for(int i=k; i<all; i++){
+            //cout << "now: "<< now << " i: " << i<<endl;
+            int temp[all];
+            for(int j=0; j<now; j++){
+                temp[j]=A[j];
+            }
+            temp[now]=A[i];
+            int t=now+1;
+            for(int j=now; j<all; j++){
+                if(j==i) continue;
+                temp[t]=A[j];
+                t++;
+            }
+            f(temp, r, all, now+1);
+        }
+        //}
+    }
+}
+
+int main()
+{
+    string s;
+    int r;
+    while(cin >> s >> r){
+        int t=s.size();
+        int A[t];
+        for(int i=0; i<t; i++){
+            A[i]=s[i];
+        }
+        sort(A, A+t);
+        f(A, r, t, 0);
+    }
+
+    return 0;
+}
+
+
