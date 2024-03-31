@@ -1,0 +1,53 @@
+#include <iostream>
+
+using namespace std;
+int A[1000][1000];
+void dfs(int x, int y){
+    if(A[x+1][y]!=-1&&A[x+1][y]>A[x][y]+1){
+        A[x+1][y]=A[x][y]+1;
+        dfs(x+1, y);
+    }
+    if(A[x-1][y]!=-1&&A[x-1][y]>A[x][y]+1){
+        A[x-1][y]=A[x][y]+1;
+        dfs(x-1, y);
+    }
+    if(A[x][y+1]!=-1&&A[x][y+1]>A[x][y]+1){
+        A[x][y+1]=A[x][y]+1;
+        dfs(x, y+1);
+    }
+    if(A[x][y-1]!=-1&&A[x][y-1]>A[x][y]+1){
+        A[x][y-1]=A[x][y]+1;
+        dfs(x, y-1);
+    }
+}
+
+int main()
+{
+    int tx, ty;
+    int N;
+    cin >> N;
+    string k;
+    for(int i=0; i<N; i++){
+        cin >> k;
+        for(int j=0; j<N; j++){
+            if(k[j]=='#'){
+                A[i][j]=-1;    
+            }
+            else{
+                A[i][j]=1000; 
+            }
+        }
+    }
+    A[1][1]=1;
+    dfs(1, 1);
+    
+    if(A[N-2][N-2]==1000){
+        cout << "No solution!";
+    }
+    else{
+        cout << A[N-2][N-2];
+    }
+
+    return 0;
+}
+
