@@ -1,0 +1,48 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int N, d, i, j, h, count=0;
+    cin >> N >> d;
+    int A[N][N];
+    for(i=0; i<N; i++){
+        for(j=0; j<N; j++){
+            cin >> A[i][j];
+        }
+    }
+    i=(N-1)/2;
+    j=(N-1)/2;
+    cout << A[i][j];
+    count++;
+    for(int k=0; k<N*2; k++){
+        h=k/2+1;
+        for(int m=0; m<h; m++){
+            if(d==0){
+                j=j-1;
+            }
+            if(d==1){
+                i=i-1;
+            }
+            if(d==2){
+                j=j+1;
+            }
+            if(d==3){
+                i=i+1;
+            }
+            count++;
+            if(count>N*N){
+                break;
+            }
+            cout << A[i][j];
+        }
+        if(count>N*N){
+            break;
+        }
+        d++;
+        d=d%4;
+    }
+
+    return 0;
+}
