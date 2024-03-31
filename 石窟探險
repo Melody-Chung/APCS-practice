@@ -1,0 +1,64 @@
+#include <iostream>
+/*#include <cmath>
+using namespace std;
+int sum=0;
+int dfs(int now){
+    int n;
+    if(now==0){
+        return 0;
+    }
+    else if(now%2==0){
+        for(int i=0; i<2; i++){
+            cin >> n;
+            n=dfs(n);
+            if(n!=0)
+            sum+=abs(n-now);
+        }
+    }
+    else{
+        for(int i=0; i<3; i++){
+            cin >> n;
+            n=dfs(n);
+            if(n!=0)
+            sum+=abs(n-now);
+        }
+    }
+    return n;
+    
+}
+int main(){
+    int n;
+    cin >> n;
+    dfs(n);
+    cout << sum;
+    return 0;
+}*/
+#include<cmath>
+using namespace std;
+long long sum=0;
+void dfs(int n){
+	if(n==0)return;
+	
+	int temp;
+	int repet;
+	if(n%2==0){
+		repet=2;
+	}else{
+		repet=3;
+	}
+	for(int i=0;i<repet;i++){
+		cin>>temp;
+		dfs(temp);
+		if(temp!=0)
+		sum+=abs(n-temp);
+	} 
+}
+int main(){
+	int start;
+	cin>>start;
+	dfs(start);
+	
+	cout<<sum;
+	return 0;
+} 
+
