@@ -1,0 +1,41 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+string s, res[35];
+int n;
+
+void DFS(int depth, int start){
+	// 枚舉完 n 個字了
+	if(depth == n){
+		for(int i=0 ; i<n ; i++){
+			cout<<res[i];
+		}
+		cout<<"\n";
+		return;
+	}
+	
+	// 第 i 個字不能重複
+	// 用 used 紀錄用過的字
+	bool used[26];
+	for(int i=0 ; i<26 ; i++){
+		used[i] = false;
+	}
+	// 前面取過的字不會再被用到
+	// 從 start 開始枚舉
+	for(int i=start ; i<s.size() ; i++){
+		if(!used[s[i]-'a']){
+			used[s[i]-'a']=true;
+			res[depth] = s[i];
+			DFS(depth+1, i+1);
+		}
+	}
+}
+
+int main(){
+	while(cin>>s>>n){
+		sort(s.begin(), s.end());
+		DFS(0, 0);
+	}
+	return 0;
+}
+
